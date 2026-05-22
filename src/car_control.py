@@ -1,0 +1,161 @@
+import logging
+import time
+
+import board
+from adafruit_pca9685 import PCA9685
+from gpiozero import LineSensor
+
+log = logging.getLogger(__name__)
+
+# create I2C bus interface
+i2c = board.I2C()
+# create PCA9685 instance
+pca = PCA9685(i2c)
+
+current_speed_front_left = 0
+current_speed_front_right = 0
+current_speed_rear_left = 0
+current_speed_rear_right = 0
+
+
+def init():
+    log.info("initialize the PWM module")
+    pca.frequency = 50
+    pca.channels[0].duty_cycle = 0
+    pca.channels[1].duty_cycle = 0
+    pca.channels[2].duty_cycle = 0
+    pca.channels[3].duty_cycle = 0
+    pca.channels[4].duty_cycle = 0
+    pca.channels[5].duty_cycle = 0
+    pca.channels[6].duty_cycle = 0
+    pca.channels[7].duty_cycle = 0
+    pass
+
+
+def stop_all():
+    pca.channels[0].duty_cycle = 0
+    pca.channels[1].duty_cycle = 0
+    pca.channels[2].duty_cycle = 0
+    pca.channels[3].duty_cycle = 0
+    pca.channels[4].duty_cycle = 0
+    pca.channels[5].duty_cycle = 0
+    pca.channels[6].duty_cycle = 0
+    pca.channels[7].duty_cycle = 0
+    current_speed_front_left = 0
+    current_speed_front_right = 0
+    current_speed_rear_left = 0
+    current_speed_rear_right = 0
+
+
+def front_left(speed=0):
+    if 0 > abs(speed) > 100:
+        log.error(f"speed {speed} outside of range 0-100")
+        return
+
+    motor_speed = int((abs(speed) * 0xFFFF) / 100)
+    current_speed_front_left = speed
+
+    if speed >= 0:
+        pca.channels[0].duty_cycle = 0
+        pca.channels[1].duty_cycle = motor_speed
+    if speed < 0:
+        pca.channels[0].duty_cycle = motor_speed
+        pca.channels[1].duty_cycle = 0
+
+
+def front_right(speed=0):
+    if 0 > abs(speed) > 100:
+        log.error(f"speed {speed} outside of range 0-100")
+        return
+
+    motor_speed = int((abs(speed) * 0xFFFF) / 100)
+    current_speed_front_right = speed
+
+    if speed >= 0:
+        pca.channels[7].duty_cycle = 0
+        pca.channels[6].duty_cycle = motor_speed
+    if speed < 0:
+        pca.channels[7].duty_cycle = motor_speed
+        pca.channels[6].duty_cycle = 0
+
+
+def rear_left(speed=0):
+    if 0 > abs(speed) > 100:
+        log.error(f"speed {speed} outside of range 0-100")
+        return
+
+    motor_speed = int((abs(speed) * 0xFFFF) / 100)
+    current_speed_rear_left = speed
+
+    if speed >= 0:
+        pca.channels[3].duty_cycle = 0
+        pca.channels[2].duty_cycle = motor_speed
+    if speed < 0:
+        pca.channels[3].duty_cycle = motor_speed
+        pca.channels[2].duty_cycle = 0
+
+
+def rear_right(speed=0):
+    if 0 > abs(speed) > 100:
+        log.error(f"speed {speed} outside of range 0-100")
+        return
+
+    motor_speed = int((abs(speed) * 0xFFFF) / 100)
+    current_speed_rear_right = speed
+
+    if speed >= 0:
+        pca.channels[4].duty_cycle = 0
+        pca.channels[5].duty_cycle = motor_speed
+    if speed < 0:
+        pca.channels[4].duty_cycle = motor_speed
+        pca.channels[5].duty_cycle = 0
+
+
+def sensor():
+    global sensorL
+    global sensorM
+    global sensorR
+
+    sensorL = LineSensor(14)
+    sensorL.when_line = lambda: print("Left Sensor: Line detected")
+    sensorL.when_no_line = lambda: print("No line detected")
+
+    sensorM = LineSensor(15)
+    sensorM.when_line = lambda: print("Middle Sensor: Line detected")
+    sensorM.when_no_line = lambda: print("No line detected")
+
+    sensorR = LineSensor(23)
+    sensorR.when_line = lambda: print("Right Sensor: Line detected")
+    sensorR.when_no_line = lambda: print("No line detected")
+
+
+def main():
+    init()
+    sensor()
+    index = 0
+    while index < 30:
+        if sensorL.value == 1 and sensorM.value == 0 and sensorR.value == 0:
+            front_left(15)
+            front_right(35)
+            rear_left(15)
+            rear_right(35)
+        elif sensorL.value == 0 and sensorM.value == 1 and sensorR.value == 0:
+            front_left(20)
+            front_right(20)
+            rear_left(20)
+            rear_right(20)
+        elif sensorL.value == 0 and sensorM.value == 0 and sensorR.value == 1:
+            front_left(35)
+            front_right(15)
+            rear_left(35)
+            rear_right(15)
+        else:
+            stop_all()
+
+        time.sleep(0.5)
+        index = index + 0.5
+    stop_all()
+    print("Ende")
+
+
+main()
