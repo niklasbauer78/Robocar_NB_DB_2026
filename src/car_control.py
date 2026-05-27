@@ -133,28 +133,24 @@ def main():
     init()
     sensor()
     index = 0
-    while index < 30:
-        if sensorL.value == 1 and sensorM.value == 0 and sensorR.value == 0:
-            front_left(15)
-            front_right(35)
-            rear_left(15)
-            rear_right(35)
-        elif sensorL.value == 0 and sensorM.value == 1 and sensorR.value == 0:
+    stop_all()
+    while True:
+        if sensorL.value == 1:
+            front_left(-20)
+            front_right(30)
+            rear_left(-20)
+            rear_right(30)
+        elif sensorM.value == 1:
             front_left(20)
             front_right(20)
             rear_left(20)
             rear_right(20)
-        elif sensorL.value == 0 and sensorM.value == 0 and sensorR.value == 1:
-            front_left(35)
-            front_right(15)
-            rear_left(35)
-            rear_right(15)
-        else:
-            stop_all()
+        elif sensorR.value == 1:
+            front_left(30)
+            front_right(-20)
+            rear_left(30)
+            rear_right(-20)
 
-        time.sleep(0.5)
-        index = index + 0.5
-    stop_all()
     print("Ende")
 
 
