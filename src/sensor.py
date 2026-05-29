@@ -1,4 +1,4 @@
-from time import sleep
+import time
 
 from gpiozero import LineSensor
 
@@ -15,7 +15,8 @@ def sensor_global():
 
 def sensor_test():
     sensor_global()
-    while True:
+    index = 0
+    while index < 10:
         if sensorL.value == 1:
             print("Left Sensor: Line detected")
         else:
@@ -30,7 +31,8 @@ def sensor_test():
             print("Right Sensor: Line detected")
         else:
             print("Right Sensor: No line detected")
-        sleep(1)
+        time.sleep(1)
+        index = index + 1
 
 
-sensor_test()
+# sensor_test()
