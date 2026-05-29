@@ -1,28 +1,37 @@
-import logging
-from gpiozero import LineSensor
+import time
 
-line_sensor_1 = LineSensor(14)
-line_sensor_2 = LineSensor(15)
-line_sensor_3 = LineSensor(23)
+import motor
+import TRCT5000
 
 
-def init():
-    pass
+def main():
+    motor.init()
+    TRCT5000.sensor_global()
+
+    input("Press Enter to START (Ctrl+C to stop)...")
+
+    try:
+        while True:
+            if TRCT5000.sensorL.value == 1:
+                motor.front_left(-30)
+                motor.front_right(30)
+                motor.rear_left(-30)
+                motor.rear_right(30)
+            elif TRCT5000.sensorM.value == 1:
+                motor.front_left(20)
+                motor.front_right(20)
+                motor.rear_left(20)
+                motor.rear_right(20)
+            elif TRCT5000.sensorR.value == 1:
+                motor.front_left(30)
+                motor.front_right(-50)
+                motor.rear_left(30)
+                motor.rear_right(-30)
+
+            time.sleep(0.05)
+    except KeyboardInterrupt:
+        print("Keyboard interrupt received — stopping motors.")
+        motor.stop_all()
 
 
-def left_is_over_black():
-    value = line_sensor_1.value
-    logging.info(f"left sensor: {value}")
-    return bool(value)
-
-
-def middle_is_over_black():
-    value = line_sensor_2.value
-    logging.info(f"middle sensor: {value}")
-    return bool(value)
-
-
-def right_is_over_black():
-    value = line_sensor_1.value
-    logging.info(f"right sensor: {value}")
-    return bool(value)
+main()

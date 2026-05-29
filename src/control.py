@@ -111,34 +111,25 @@ def rear_right(speed=0):
         pca.channels[5].duty_cycle = 0
 
 
-def sensor():
+def sensor_global():
     global sensorL
     global sensorM
     global sensorR
 
     sensorL = LineSensor(14)
-    sensorL.when_line = lambda: print("Left Sensor: Line detected")
-    sensorL.when_no_line = lambda: print("No line detected")
-
     sensorM = LineSensor(15)
-    sensorM.when_line = lambda: print("Middle Sensor: Line detected")
-    sensorM.when_no_line = lambda: print("No line detected")
-
     sensorR = LineSensor(23)
-    sensorR.when_line = lambda: print("Right Sensor: Line detected")
-    sensorR.when_no_line = lambda: print("No line detected")
 
 
 def main():
     init()
-    sensor()
-    index = 0
-    stop_all()
+    sensor_global()
+
     while True:
         if sensorL.value == 1:
-            front_left(-20)
+            front_left(0)
             front_right(30)
-            rear_left(-20)
+            rear_left(0)
             rear_right(30)
         elif sensorM.value == 1:
             front_left(20)
@@ -147,11 +138,9 @@ def main():
             rear_right(20)
         elif sensorR.value == 1:
             front_left(30)
-            front_right(-20)
+            front_right(0)
             rear_left(30)
-            rear_right(-20)
-
-    print("Ende")
+            rear_right(0)
 
 
 main()
