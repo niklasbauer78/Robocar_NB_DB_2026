@@ -1,6 +1,5 @@
-Robocar_NB_DB_2026
+# Robocar Team 2
 
-Team 2  
 Niklas Bauer  
 Dominik Borggreven  
 
