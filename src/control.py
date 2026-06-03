@@ -1,146 +1,49 @@
-import logging
+import json
+import os
 import time
 
-import board
-from adafruit_pca9685 import PCA9685
-from gpiozero import LineSensor
+import motor
+import sensor
 
-log = logging.getLogger(__name__)
+# Get the directory where the config script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(script_dir, "config.json")
 
-# create I2C bus interface
-i2c = board.I2C()
-# create PCA9685 instance
-pca = PCA9685(i2c)
-
-current_speed_front_left = 0
-current_speed_front_right = 0
-current_speed_rear_left = 0
-current_speed_rear_right = 0
+# open the config script to use it as a dictionary
+with open(config_path, "r") as file:
+    config = json.load(file)
 
 
-def init():
-    log.info("initialize the PWM module")
-    pca.frequency = 50
-    pca.channels[0].duty_cycle = 0
-    pca.channels[1].duty_cycle = 0
-    pca.channels[2].duty_cycle = 0
-    pca.channels[3].duty_cycle = 0
-    pca.channels[4].duty_cycle = 0
-    pca.channels[5].duty_cycle = 0
-    pca.channels[6].duty_cycle = 0
-    pca.channels[7].duty_cycle = 0
-    pass
+def control_global():
+    if sensor.sensorL.value == 1:
+        motor.front_left(config["Corner Speed inner wheels"])
+        motor.front_right(config["Corner Speed outer wheels"])
+        motor.rear_left(config["Corner Speed inner wheels"])
+        motor.rear_right(config["Corner Speed outer wheels"])
+    elif sensor.sensorM.value == 1:
+        motor.front_left(config["Speed forward"])
+        motor.front_right(config["Speed forward"])
+        motor.rear_left(config["Speed forward"])
+        motor.rear_right(config["Speed forward"])
+    elif sensor.sensorR.value == 1:
+        motor.front_left(config["Corner Speed outer wheels"])
+        motor.front_right(config["Corner Speed inner wheels"])
+        motor.rear_left(config["Corner Speed outer wheels"])
+        motor.rear_right(config["Corner Speed inner wheels"])
+
+    time.sleep(0.05)
 
 
-def stop_all():
-    pca.channels[0].duty_cycle = 0
-    pca.channels[1].duty_cycle = 0
-    pca.channels[2].duty_cycle = 0
-    pca.channels[3].duty_cycle = 0
-    pca.channels[4].duty_cycle = 0
-    pca.channels[5].duty_cycle = 0
-    pca.channels[6].duty_cycle = 0
-    pca.channels[7].duty_cycle = 0
-    current_speed_front_left = 0
-    current_speed_front_right = 0
-    current_speed_rear_left = 0
-    current_speed_rear_right = 0
+def control_test():
+    index = 0
+    motor.init()
+    sensor.sensor_global()
+
+    while index < 200:
+        control_global()
+        index = index + 1
+
+    motor.stop_all()
 
 
-def front_left(speed=0):
-    if 0 > abs(speed) > 100:
-        log.error(f"speed {speed} outside of range 0-100")
-        return
-
-    motor_speed = int((abs(speed) * 0xFFFF) / 100)
-    current_speed_front_left = speed
-
-    if speed >= 0:
-        pca.channels[0].duty_cycle = 0
-        pca.channels[1].duty_cycle = motor_speed
-    if speed < 0:
-        pca.channels[0].duty_cycle = motor_speed
-        pca.channels[1].duty_cycle = 0
-
-
-def front_right(speed=0):
-    if 0 > abs(speed) > 100:
-        log.error(f"speed {speed} outside of range 0-100")
-        return
-
-    motor_speed = int((abs(speed) * 0xFFFF) / 100)
-    current_speed_front_right = speed
-
-    if speed >= 0:
-        pca.channels[7].duty_cycle = 0
-        pca.channels[6].duty_cycle = motor_speed
-    if speed < 0:
-        pca.channels[7].duty_cycle = motor_speed
-        pca.channels[6].duty_cycle = 0
-
-
-def rear_left(speed=0):
-    if 0 > abs(speed) > 100:
-        log.error(f"speed {speed} outside of range 0-100")
-        return
-
-    motor_speed = int((abs(speed) * 0xFFFF) / 100)
-    current_speed_rear_left = speed
-
-    if speed >= 0:
-        pca.channels[3].duty_cycle = 0
-        pca.channels[2].duty_cycle = motor_speed
-    if speed < 0:
-        pca.channels[3].duty_cycle = motor_speed
-        pca.channels[2].duty_cycle = 0
-
-
-def rear_right(speed=0):
-    if 0 > abs(speed) > 100:
-        log.error(f"speed {speed} outside of range 0-100")
-        return
-
-    motor_speed = int((abs(speed) * 0xFFFF) / 100)
-    current_speed_rear_right = speed
-
-    if speed >= 0:
-        pca.channels[4].duty_cycle = 0
-        pca.channels[5].duty_cycle = motor_speed
-    if speed < 0:
-        pca.channels[4].duty_cycle = motor_speed
-        pca.channels[5].duty_cycle = 0
-
-
-def sensor_global():
-    global sensorL
-    global sensorM
-    global sensorR
-
-    sensorL = LineSensor(14)
-    sensorM = LineSensor(15)
-    sensorR = LineSensor(23)
-
-
-def main():
-    init()
-    sensor_global()
-
-    while True:
-        if sensorL.value == 1:
-            front_left(0)
-            front_right(30)
-            rear_left(0)
-            rear_right(30)
-        elif sensorM.value == 1:
-            front_left(20)
-            front_right(20)
-            rear_left(20)
-            rear_right(20)
-        elif sensorR.value == 1:
-            front_left(30)
-            front_right(0)
-            rear_left(30)
-            rear_right(0)
-
-
-main()
+# control_test()  ##remove "#" to test the control.py program for 10 seconds

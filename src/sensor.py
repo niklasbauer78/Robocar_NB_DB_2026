@@ -35,4 +35,4 @@ def sensor_test():
         index = index + 1
 
 
-# sensor_test()
+# sensor_test()     ##remove "#" to test the sensor.py program

@@ -1,34 +1,18 @@
-import time
-
+import control
 import motor
 import sensor
 
 
 def main():
     motor.init()
-    sensor.sensor_global()
+    sensor.sensor_global()  # get sensor values
 
     input("Press Enter to START (Ctrl+C to stop)...")
 
     try:
         while True:
-            if sensor.sensorL.value == 1:
-                motor.front_left(-30)
-                motor.front_right(30)
-                motor.rear_left(-30)
-                motor.rear_right(30)
-            elif sensor.sensorM.value == 1:
-                motor.front_left(20)
-                motor.front_right(20)
-                motor.rear_left(20)
-                motor.rear_right(20)
-            elif sensor.sensorR.value == 1:
-                motor.front_left(30)
-                motor.front_right(-50)
-                motor.rear_left(30)
-                motor.rear_right(-30)
+            control.control_global()  # activate wheels according to sensor values
 
-            time.sleep(0.05)
     except KeyboardInterrupt:
         print("Keyboard interrupt received — stopping motors.")
         motor.stop_all()
