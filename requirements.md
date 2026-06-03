@@ -1,6 +1,8 @@
-Abgabe: 17.06.2026 (Präsentation als PDF, Link zum Repository)
+# Abgabe: 17.06.2026
+	-Präsentation als PDF
+	-Link zum Repository
 
-‒Präsentation:
+## Präsentation:
 	-Präsentationsweise
 		-Verständliche Sprache
 		-Angemessenes Tempo
@@ -12,7 +14,7 @@ Abgabe: 17.06.2026 (Präsentation als PDF, Link zum Repository)
 		-Lesbarkeit
 		-Sinnvolle Nutzung von Bildern/Grafiken
 		-Unterstützung des Gesagten
-  -Zeitmanagement
+  	-Zeitmanagement
 		-Vorgabe 5 Minuten einhalten
 		-Gute Gewichtung der Punkte
 		-Ähnliche Redezeit der Präsentatorinnen
@@ -22,21 +24,21 @@ Abgabe: 17.06.2026 (Präsentation als PDF, Link zum Repository)
 		-Grafik zur Erläuterung des Algorithmus zur Linienverfolgung
 		-Erläuterung, warum genau dieser Algorithmus
 
--Code:
+## Code:
 	-Einhalten der Regeln des digitalen Designs
 	-Einhaltung der Regeln des Clean Code (08_Einführung_in_Clean_Code Skript)
 		Auszug:
 		-Eindeutige, aussprechbare Namen
 		-Namen verschiedener Variablen deutlich unterschiedlich benennen
-		-Zeichen vermeiden
+		-Namen mit Sonderzeichen vermeiden
 		-Variablen, Module, Dateien: Substantive
 		-Funktionen, Methoden: Verben
 		-Möglichst max. 2 Indentations
 		-Kommentare nur wenn unbedingt notwendig
 	-Erfolgreiches Absolvieren des Parcours
 
--Repository (Robocar_INITIALEN1_INITIALEN2_2026):
-  -ReadMe
+## Repository (Robocar_INITIALEN1_INITIALEN2_2026):
+  	-ReadMe
 	-Schaltplan
 	-Requirements
 	-Grafik zur Erläuterung des Codes
