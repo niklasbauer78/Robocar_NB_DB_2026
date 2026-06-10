@@ -1,8 +1,8 @@
-# Abgabe: 17.06.2026
+Abgabe: 17.06.2026
 	-Präsentation als PDF
 	-Link zum Repository
 
-## Präsentation:
+Präsentation:
 	-Präsentationsweise
 		-Verständliche Sprache
 		-Angemessenes Tempo
@@ -24,8 +24,12 @@
 		-Grafik zur Erläuterung des Algorithmus zur Linienverfolgung
 		-Erläuterung, warum genau dieser Algorithmus
 
-## Code:
+Code:
 	-Einhalten der Regeln des digitalen Designs
+		-Disziplin
+		-Hierarchie
+		-Modularität
+		-Regularität
 	-Einhaltung der Regeln des Clean Code (08_Einführung_in_Clean_Code Skript)
 		Auszug:
 		-Eindeutige, aussprechbare Namen
@@ -37,7 +41,7 @@
 		-Kommentare nur wenn unbedingt notwendig
 	-Erfolgreiches Absolvieren des Parcours
 
-## Repository (Robocar_INITIALEN1_INITIALEN2_2026):
+Repository (Robocar_INITIALEN1_INITIALEN2_2026):
   	-ReadMe
 	-Schaltplan
 	-Requirements
