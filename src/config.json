@@ -1,5 +1,8 @@
 {
     "Speed forward": 20,
     "Corner Speed inner wheels": -25,
-    "Corner Speed outer wheels": 25
+    "Corner Speed outer wheels": 25,
+
+    "Sensor over black": 1,
+    "Cycle time": 0.05
 }

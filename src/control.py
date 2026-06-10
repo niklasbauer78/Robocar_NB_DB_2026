@@ -15,23 +15,23 @@ with open(config_path, "r") as file:
 
 
 def control_global():
-    if sensor.sensorL.value == 1:
+    if sensor.sensorL.value == config["Sensor over black"]:
         motor.front_left(config["Corner Speed inner wheels"])
         motor.front_right(config["Corner Speed outer wheels"])
         motor.rear_left(config["Corner Speed inner wheels"])
         motor.rear_right(config["Corner Speed outer wheels"])
-    elif sensor.sensorM.value == 1:
+    elif sensor.sensorM.value == config["Sensor over black"]:
         motor.front_left(config["Speed forward"])
         motor.front_right(config["Speed forward"])
         motor.rear_left(config["Speed forward"])
         motor.rear_right(config["Speed forward"])
-    elif sensor.sensorR.value == 1:
+    elif sensor.sensorR.value == config["Sensor over black"]:
         motor.front_left(config["Corner Speed outer wheels"])
         motor.front_right(config["Corner Speed inner wheels"])
         motor.rear_left(config["Corner Speed outer wheels"])
         motor.rear_right(config["Corner Speed inner wheels"])
 
-    time.sleep(0.05)
+    time.sleep(config["Cycle time"])
 
 
 def control_test():
@@ -46,4 +46,4 @@ def control_test():
     motor.stop_all()
 
 
-# control_test()  ##remove "#" to test the control.py program for 10 seconds
+# control_test()  ##remove "#" to test the control.py program

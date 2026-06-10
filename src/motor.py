@@ -1,4 +1,5 @@
 import logging
+import time
 
 import board
 from adafruit_pca9685 import PCA9685
@@ -107,3 +108,21 @@ def rear_right(speed=0):
     if speed < 0:
         pca.channels[4].duty_cycle = motor_speed
         pca.channels[5].duty_cycle = 0
+
+
+def motor_test():
+    init()
+    front_left(30)
+    front_right(30)
+    rear_left(30)
+    rear_right(30)
+    time.sleep(3)
+    front_left(-30)
+    front_right(-30)
+    rear_left(-30)
+    rear_right(-30)
+    time.sleep(3)
+    stop_all()
+
+
+# motor_test()     ##remove "#" to test the sensor.py program
