@@ -1,7 +1,7 @@
 {
-    "Speed forward": 20,
-    "Corner Speed inner wheels": -25,
-    "Corner Speed outer wheels": 25,
+    "Speed forward": 25,
+    "Corner Speed inner wheels": -30,
+    "Corner Speed outer wheels": 30,
 
     "Sensor over black": 1,
     "Cycle time": 0.05
