@@ -14,18 +14,18 @@ with open(config_path, "r") as file:
     config = json.load(file)
 
 
-def control_global():
-    if sensor.sensorL.value == config["Sensor over black"]:
+def DriveFromSensors():
+    if sensor.SensorLeft.value == config["Sensor over black"]:
         motor.front_left(config["Corner Speed inner wheels"])
         motor.front_right(config["Corner Speed outer wheels"])
         motor.rear_left(config["Corner Speed inner wheels"])
         motor.rear_right(config["Corner Speed outer wheels"])
-    elif sensor.sensorM.value == config["Sensor over black"]:
+    elif sensor.SensorMiddle.value == config["Sensor over black"]:
         motor.front_left(config["Speed forward"])
         motor.front_right(config["Speed forward"])
         motor.rear_left(config["Speed forward"])
         motor.rear_right(config["Speed forward"])
-    elif sensor.sensorR.value == config["Sensor over black"]:
+    elif sensor.SensorRight.value == config["Sensor over black"]:
         motor.front_left(config["Corner Speed outer wheels"])
         motor.front_right(config["Corner Speed inner wheels"])
         motor.rear_left(config["Corner Speed outer wheels"])
@@ -34,16 +34,16 @@ def control_global():
     time.sleep(config["Cycle time"])
 
 
-def control_test():
+def test():
     index = 0
     motor.init()
-    sensor.sensor_global()
+    sensor.init()
 
     while index < 200:
-        control_global()
+        DriveFromSensors()
         index = index + 1
 
     motor.stop_all()
 
 
-# control_test()  ##remove "#" to test the control.py program
+# test()  ##remove "#" to test the control.py program

@@ -5,13 +5,13 @@ import sensor
 
 def main():
     motor.init()
-    sensor.sensor_global()  # get sensor values
+    sensor.init()
 
     input("Press Enter to START (Ctrl+C to stop)...")
 
     try:
         while True:
-            control.control_global()  # activate wheels according to sensor values
+            control.DriveFromSensors()
 
     except KeyboardInterrupt:
         print("Keyboard interrupt received — stopping motors.")
