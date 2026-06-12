@@ -58,11 +58,14 @@ Da keines der Teammitglieder perfekt programmieren konnte setzte sich schnell da
 
 ## Projektstruktur
 
-- [main.py](#main.py)
-- [motor.py](#motor.py)
-- [sensor.py](#sensor.py)
-- [control.py](#control.py)
-- [config.json](#config.json)
+```text
+.
+├── main.py
+├── motor.py
+├── sensor.py
+├── control.py
+└── config.json
+```
 
 ### main.py
 
@@ -97,8 +100,8 @@ Auf folgenden Eingängen des Raspberry Pi können die Sensorwerte ausgelesen wer
 | Mitte | GPIO 15 |
 | Rechts | GPIO 23 |
 
-Bei "Linie erkannt" liefert GPIO eine 1. Bei "keine Linie erkannt" entsprechend eine 0.
-(Sollten die Sensoren genau anders herum reagieren, kann dies in der config.json angepasst werden)
+Bei "Linie erkannt" liefert GPIO eine 1. Bei "keine Linie erkannt" entsprechend eine 0.  
+(Sollten die Sensoren invertiert reagieren, kann dies in der config.json angepasst werden)
 
 ## Motorlogik
 
