@@ -15,8 +15,8 @@ def init():
 
 def test():
     init()
-    index = 0
-    while index < 10:
+    timer = 0
+    while timer < 10:
         if SensorLeft.value == 1:
             print("Left Sensor: Line detected")
         else:
@@ -32,7 +32,7 @@ def test():
         else:
             print("Right Sensor: No line detected")
         time.sleep(1)
-        index = index + 1
+        timer = timer + 1
 
 
 # test()     ##remove "#" to test the sensor.py program

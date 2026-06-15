@@ -111,17 +111,20 @@ def rear_right(speed=0):
 
 
 def motor_test():
+    test_speed_frontward = 30
+    test_speed_backward = -30
+    test_time = 3
     init()
-    front_left(30)
-    front_right(30)
-    rear_left(30)
-    rear_right(30)
-    time.sleep(3)
-    front_left(-30)
-    front_right(-30)
-    rear_left(-30)
-    rear_right(-30)
-    time.sleep(3)
+    front_left(test_speed_frontward)
+    front_right(test_speed_frontward)
+    rear_left(test_speed_frontward)
+    rear_right(test_speed_frontward)
+    time.sleep(test_time)
+    front_left(test_speed_backward)
+    front_right(test_speed_backward)
+    rear_left(test_speed_backward)
+    rear_right(test_speed_backward)
+    time.sleep(test_time)
     stop_all()
 
 

@@ -35,13 +35,13 @@ def DriveFromSensors():
 
 
 def test():
-    index = 0
+    timer = 0
     motor.init()
     sensor.init()
 
-    while index < 200:
+    while timer < 200:
         DriveFromSensors()
-        index = index + 1
+        timer = timer + 1
 
     motor.stop_all()
 
