@@ -1,54 +1,24 @@
-Abgabe: 17.06.2026
-	-Präsentation als PDF
-	-Link zum Repository
-
-Präsentation:
-	-Präsentationsweise
-		-Verständliche Sprache
-		-Angemessenes Tempo
-		-Lautstärke
-		-Blickkontakt
-		-Körpersprache
-	-Visualisierung
-		-Übersichtlichkeit
-		-Lesbarkeit
-		-Sinnvolle Nutzung von Bildern/Grafiken
-		-Unterstützung des Gesagten
-  	-Zeitmanagement
-		-Vorgabe 5 Minuten einhalten
-		-Gute Gewichtung der Punkte
-		-Ähnliche Redezeit der Präsentatorinnen
-	-Inhalt:
-		-Erläuterung zum Team-Namen
-		-3 Beispiele aus dem Code, bei denen uns aufgefallen ist, dass die Verwendung von Clean Code uns geholfen hat
-		-Grafik zur Erläuterung des Algorithmus zur Linienverfolgung
-		-Erläuterung, warum genau dieser Algorithmus
-
-Code:
-	-Einhalten der Regeln des digitalen Designs
-		-Disziplin
-		-Hierarchie
-		-Modularität
-		-Regularität
-	-Einhaltung der Regeln des Clean Code (08_Einführung_in_Clean_Code Skript)
-		Auszug:
-		-Eindeutige, aussprechbare Namen
-		-Namen verschiedener Variablen deutlich unterschiedlich benennen
-		-Namen mit Sonderzeichen vermeiden
-		-Variablen, Module, Dateien: Substantive
-		-Funktionen, Methoden: Verben
-		-Möglichst max. 2 Indentations
-		-Kommentare nur wenn unbedingt notwendig
-	-Erfolgreiches Absolvieren des Parcours
-
-Repository (Robocar_INITIALEN1_INITIALEN2_2026):
-  	-ReadMe
-	-Schaltplan
-	-Requirements
-	-Grafik zur Erläuterung des Codes
-	-source/src:
-		-Motor.py
-		-Sensor.py
-		-Control.py
-		-main.py
-		-config.json
+Adafruit-Blinka==9.1.0
+Adafruit-Blinka-Raspberry-Pi5-Neopixel==1.0.0rc2
+adafruit-circuitpython-busdevice==5.2.17
+adafruit-circuitpython-connectionmanager==3.1.8
+adafruit-circuitpython-motor==3.4.20
+adafruit-circuitpython-motorkit==1.6.21
+adafruit-circuitpython-pca9685==3.4.22
+adafruit-circuitpython-register==1.11.3
+adafruit-circuitpython-requests==4.1.17
+adafruit-circuitpython-typing==1.12.3
+Adafruit-PlatformDetect==3.88.0
+Adafruit-PureIO==1.1.11
+binho-host-adapter==0.1.6
+colorzero==2.0
+gpiozero==2.0.1
+lgpio==0.2.2.0
+pyftdi==0.57.1
+pyserial==3.5
+pyusb==1.3.1
+RPi.GPIO==0.7.1
+rpi_ws281x==5.0.0
+setuptools==82.0.1
+sysv_ipc==1.2.0
+typing_extensions==4.15.0
